@@ -52,18 +52,18 @@ HOP_SIZE=512
 # Y_angry_back_log=librosa.power_to_db(Y_angry_back)
 # plot_spectrogram(Y_angry_back_log,angry_back_sr,HOP_SIZE,y_axis="log")
 
-fig, ax = plt.subplots(nrows=2, ncols=2, sharex=False,figsize=(15,10))
-ax[0][0].set(title='ANGRY')
-ax[0][1].set(title='FEAR')
-ax[1][0].set(title='HAPPY')
-angry=plot_spectrogram(calcSpectrogram(angry_back,FRAME_SIZE,HOP_SIZE),angry_back_sr,HOP_SIZE,ax[0][0],"log")
-fear=plot_spectrogram(calcSpectrogram(fear_back,FRAME_SIZE,HOP_SIZE),angry_back_sr,HOP_SIZE,ax[0][1],"log")
-happy=plot_spectrogram(calcSpectrogram(happy_back,FRAME_SIZE,HOP_SIZE),angry_back_sr,HOP_SIZE,ax[1][0],"log")
-plt.subplots_adjust(hspace=1)
-format="%.2f"
-fig.colorbar(angry,ax=[ax[0][0]],format=format)
-fig.colorbar(fear,ax=[ax[0][1]],format=format)
-fig.colorbar(angry,ax=[ax[1][0]],format=format)
-
-
-plt.show()
+# fig, ax = plt.subplots(nrows=2, ncols=2, sharex=False,figsize=(15,10))
+# ax[0][0].set(title='ANGRY')
+# ax[0][1].set(title='FEAR')
+# ax[1][0].set(title='HAPPY')
+# angry=plot_spectrogram(calcSpectrogram(angry_back,FRAME_SIZE,HOP_SIZE),angry_back_sr,HOP_SIZE,ax[0][0],"log")
+# fear=plot_spectrogram(calcSpectrogram(fear_back,FRAME_SIZE,HOP_SIZE),angry_back_sr,HOP_SIZE,ax[0][1],"log")
+# happy=plot_spectrogram(calcSpectrogram(happy_back,FRAME_SIZE,HOP_SIZE),angry_back_sr,HOP_SIZE,ax[1][0],"log")
+# plt.subplots_adjust(hspace=1)
+# format="%.2f"
+# fig.colorbar(angry,ax=[ax[0][0]],format=format)
+# fig.colorbar(fear,ax=[ax[0][1]],format=format)
+# fig.colorbar(angry,ax=[ax[1][0]],format=format)
+#
+#
+# plt.show()
