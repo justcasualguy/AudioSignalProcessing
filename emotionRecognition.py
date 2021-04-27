@@ -1,6 +1,6 @@
 import os
 
-import librosa.display
+# import librosa.display
 import scipy
 import scipy.io.wavfile
 import matplotlib.pyplot as plt
@@ -16,12 +16,16 @@ frame_hop=0.01
 sample_rate, signal = scipy.io.wavfile.read(getWavPath("oaf","angry","back"))
 signal = mfcc.pre_emphasis(signal,0.95)
 frames = mfcc.framing(signal,sample_rate,frame_length,frame_hop)
-frames_windows = mfcc.hamming_window(frames,frame_length)
+frames_windowed = mfcc.hamming_window(frames, int(frame_length * sample_rate))
+frames_magnitude = mfcc.stft(frames_windowed,512)
+# flattened = np.array(frames_magnitude).flatten()
+
 # signal_linespace=np.linspace(0,signal.shape[0]/sample_rate,signal.shape[0])
-# plt.plot(signal_linespace,signal)
-# plt.title("Fraza \"Say the word back\", emocja: złość")
-# plt.xlabel("Czas [s]")
-# plt.ylabel("Amplituda")
-# plt.show()
+signal_linespace=np.linspace(0,np.max(frames_magnitude[0]),frames_magnitude[0])
+plt.plot(signal_linespace,signal)
+plt.title("Fraza \"Say the word back\", emocja: złość")
+plt.xlabel("Czas [s]")
+plt.ylabel("Amplituda")
+plt.show()
 
 
