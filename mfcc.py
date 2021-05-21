@@ -92,3 +92,15 @@ def melFreqToFreq(mel_freq):
 
 def dct(frames):
     return fftpack.dct(frames)
+
+def deltaCoefficients(coefficients):
+    deltas = [coefficients[0]]
+    for i in range(1,len(coefficients)-1):
+        deltas.append(coefficients[i]-coefficients[i-1])
+    return deltas
+
+def deltaCoefficientsForEachFrame(mfccs):
+    deltas=[]
+    for frame in mfccs:
+        deltas.append(deltaCoefficients(frame))
+    return deltas

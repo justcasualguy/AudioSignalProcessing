@@ -12,7 +12,7 @@ def getWavPath(oafOrYaf,emotion,word):
     rootPath = "TESS Speech Data"
     fullpath=os.path.join(rootPath,str.upper(oafOrYaf)+"_"+emotion,str.upper(oafOrYaf)+"_"+word+"_"+emotion+".wav")
     return fullpath
-# x = np.array([[1], [4]], np.int32)
+
 frame_length=0.025
 frame_hop=0.01
 num_mfccs=12
@@ -26,6 +26,8 @@ max= np.max(frames_magnitude)
 linspace = np.linspace(0,sample_rate/2,len(frames_magnitude[0]))
 frames_filtered=mfcc.mel_filter_banks(40,sample_rate,frames_magnitude)
 coefficients = mfcc.dct(frames_filtered)[:,1:num_mfccs+1]
+deltas = mfcc.deltaCoefficientsForEachFrame(coefficients)
+deltas_deltas = mfcc.deltaCoefficients(deltas)
 plots.plot_spectrogram(coefficients,signal,sample_rate)
 mfcc = librosa.feature.mfcc(frames_filtered,sample_rate)[1:13]
 plots.plot_spectrogram(mfcc,signal,sample_rate)
