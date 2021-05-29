@@ -1,6 +1,7 @@
 import numpy as np
 import scipy.fftpack as fftpack
 import librosa
+import scipy.io.wavfile
 
 
 def pre_emphasis(signal, filter_coefficient):
@@ -104,3 +105,20 @@ def deltaCoefficientsForEachFrame(mfccs):
     for frame in mfccs:
         deltas.append(deltaCoefficients(frame))
     return deltas
+
+
+"""
+:param frame_length_sec: frame length in secs
+:param frame_hop_sec: frame hope in sec 
+:param num_mfccs: number of mfccs
+:param signal
+"""
+
+def getMfccs(signal,sample_rate,frame_length_sec,frame_hop_sec,num_filterbanks,num_mfccs):
+    signal = pre_emphasis(signal, 0.95)
+    frames = framing(signal, sample_rate, frame_length_sec, frame_hop_sec)
+    frames_windowed = hamming_window(frames, int(frame_length_sec * sample_rate))
+    frames_magnitude = dft(frames_windowed)
+    frames_filtered = mel_filter_banks(num_filterbanks, sample_rate, frames_magnitude)
+    coefficients = dct(frames_filtered)[:, 1:num_mfccs + 1]
+    return coefficients
